@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Services";
+}
+
+<div class="container mt-4">
+    <h2>Services</h2>
+
+    @if (ViewBag.PrenotazioneEffettuata != null && ViewBag.PrenotazioneEffettuata)
+    {
+        <div class="alert alert-success" role="alert">
+            SERVIZIO AGGIUNTO CON SUCCESSO
+        </div>
+    }
+
+    @using (Html.BeginForm("AddServices", "Home", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label for="IdCamera">Seleziona la tua prenotazione:</label>
+            <select id="IdCamera" name="IdCamera" class="form-control">
+                @foreach (var c in ViewBag.ListaCamere)
+                {
+                    <option value="@c.IdPrenotazione">@c.IdPrenotazione</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="IdServizio">Scegli il servizio:</label>
+            <select id="IdServizio" name="IdServizio" class="form-control">
+                @foreach (var s in ViewBag.ListaServizi)
+                {
+                    <option value="@s.IdServizio">@s.TipoServizio - @s.Prezzo€</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Quant">Quantità:</label>
+            <input type="number" id="Quant" name="Quant" value="1" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Aggiungi Servizio</button>
+    }
+</div>

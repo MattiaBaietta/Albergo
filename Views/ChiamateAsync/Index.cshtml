@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista Chiamate Async on Ajax</h2>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="CFiscale">Inserisci il codice fiscale da cercare:</label>
+            <div class="input-group">
+                <input type="text" id="CFiscale" class="form-control" />
+                <div class="input-group-append">
+                    <button id="searchCF" class="btn btn-primary">Ricerca</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="CF" class="mt-4"></div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <button id="pensioneC" class="btn btn-primary">Numero Totale di tipo "pensione completa"</button>
+        </div>
+    </div>
+
+    <div id="count" class="mt-4"></div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#searchCF').click(function () {
+                $('#CF').html("");
+                var CFiscale = $('#CFiscale').val();
+                $.ajax({
+                    url: 'RicercaCF?CFiscale=' + CFiscale,
+                    type: 'GET',
+                    success: function (data) {
+                        $.each(data, function (index) {
+                            $('#CF').append("<label>" + "Nome:" + data[index].Nome + "<br>Cognome:" + data[index].Cognome + "<br>Provincia: " + data[index].Provincia + "</label>");
+                        });
+                    }
+                });
+            });
+
+            $('#pensioneC').click(function () {
+                $('#count').html("");
+                $.ajax({
+                    url: 'PensioneCompleta',
+                    type: 'GET',
+                    success: function (data) {
+                        $('#count').append("<label>" + "Numero Prenotazioni di Tipo Pensione completa:" + data + "</label>");
+                    }
+                });
+            });
+        });
+    </script>
+}

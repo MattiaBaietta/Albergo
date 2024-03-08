@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Reservation";
+}
+
+<div class="container mt-4">
+    @if (ViewBag.PrenotazioneEffettuata != null && ViewBag.PrenotazioneEffettuata)
+    {
+        <div class="alert alert-success" role="alert">
+            PRENOTAZIONE EFFETTUATA CON SUCCESSO
+        </div>
+    }
+
+    <h3>EFFETTUA LA PRENOTAZIONE</h3>
+
+    @using (Html.BeginForm("AddReservation", "Home", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="mb-4">Inserisci i tuoi dati:</h3>
+                <div class="form-group">
+                    <label for="Nome">Nome:</label>
+                    <input id="Nome" name="Nome" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Cognome">Cognome:</label>
+                    <input id="Cognome" name="Cognome" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="CFiscale">Codice Fiscale:</label>
+                    <input id="CFiscale" name="CFiscale" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Provincia">Provincia:</label>
+                    <input id="Provincia" name="Provincia" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Mail">E-mail:</label>
+                    <input id="Mail" name="Mail" type="email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Telefono">Num Telefono:</label>
+                    <input id="Telefono" name="Telefono" type="number" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Cel">Num Cellulare:</label>
+                    <input id="Cel" name="Cel" type="number" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3 class="mb-4">Inserisci nuova prenotazione:</h3>
+                <div class="form-group">
+                    <label for="Inizio">Data Arrivo:</label>
+                    <input id="Inizio" name="Inizio" type="date" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Fine">Data Partenza:</label>
+                    <input id="Fine" name="Fine" type="date" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Caparra">Caparra che si vuole versale:</label>
+                    <input id="Caparra" name="Caparra" type="number" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="IdCamera">Scegli la camera</label>
+                    <select id="IdCamera" name="IdCamera" class="form-control">
+                        @foreach (var c in ViewBag.Camere)
+                        {
+                            <option value="@c.IdCamera">@c.Descrizione @c.Prezzo€</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="TipoTariffa">Tipo Tariffa:</label>
+                    <select id="TipoTariffa" name="TipoTariffa" class="form-control">
+                        <option value="Mezza Pensione">Mezza Pensione +50€</option>
+                        <option value="Pensione Completa">Pensione Completa +100€</option>
+                        <option value="Pernottamento Colazione">Pernottamento con prima colazione +150€</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Inserisci Prenotazione</button>
+    }
+</div>

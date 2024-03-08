@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            @using (Html.BeginForm("Login", "Login", FormMethod.Get))
+            {
+                <form>
+                    <h3 class="mb-4">Inserisci i dati per il login:</h3>
+                    @if (TempData["login"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            CREDENZIALI ERRATE
+                        </div>
+                    }
+                    <div class="form-group">
+                        <label for="User">Username:</label>
+                        <input id="User" name="User" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Password:</label>
+                        <input id="Password" name="Password" type="password" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            }
+        </div>
+    </div>
+</div>
